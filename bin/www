@@ -22,9 +22,29 @@ app.set('port', port);
 var server = http.createServer(app);
 var io        = require('socket.io').listen(server)
 
+// this will store all the usernames and their socket.id
+var usernames = {}
 // socket Code will be written here
 io.sockets.on('connect', function(socket){
   console.log('connected')
+
+  // this is setting up a listener
+  socket.on('addUser', function(username){
+    console.log(username)
+    // storing their name as the key and socket.id as value
+    usernames[username] = socket.id
+
+    // were going to send to every socket connection the users array
+    io.sockets.emit('users', Object.keys(usernames))
+  })
+
+  // listening for messages
+  socket.on('message', function(message){
+    console.log(message)
+  })
+
+
+
 })
 /**
  * Listen on provided port, on all network interfaces.
