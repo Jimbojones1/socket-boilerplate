@@ -10,9 +10,9 @@ export class ChatRooms extends React.Component {
     socket.emit('join room', e.target.innerText)
   }
   render() {
-    var self = this
-    var rooms = this.props.rooms.map(function(room, i){
-      return <li key={i} onClick={self.joinRoom}>{room.room}</li>
+
+    var rooms = this.props.rooms.map((room, i) => {
+      return <li key={i} onClick={this.joinRoom}>{room.room}</li>
     })
 
     return (
@@ -27,12 +27,4 @@ export class ChatRooms extends React.Component {
 
 
 }
-// export var ChatRooms = React.createClass({
-//   joinRoom: function(e){
-//         socket.emit('join room', e.target.innerText)
 
-//   },
-//   render: function(){
-
-//   }
-// })
