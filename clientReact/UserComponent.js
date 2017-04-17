@@ -1,7 +1,7 @@
 var React    = require('react')
 
 export function Users(props){
-    var users = props.usernames.map(function(user, i){
+    var users = props.usernames.map((user, i) => {
       return <li key={i}>{user}</li>
     })
 

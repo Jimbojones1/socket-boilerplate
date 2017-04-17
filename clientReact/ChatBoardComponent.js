@@ -15,7 +15,7 @@ export class ChatBoard extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     socket.emit('message', this.state.messageValue)
-    var state = this.state;
+    const state = this.state;
     state.messageValue = '';
     this.setState(state)
   }

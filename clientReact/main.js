@@ -44,7 +44,7 @@ var Username = React.createClass({
     this.props.logged(true)
   },
   handleNameChange: function(event){
-    var state = this.state;
+    const state = this.state;
     state.username = event.target.value;
     this.setState(state)
   },

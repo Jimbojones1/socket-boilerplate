@@ -11,7 +11,7 @@ export class ChatRooms extends React.Component {
   }
   render() {
 
-    var rooms = this.props.rooms.map((room, i) => {
+    let rooms = this.props.rooms.map((room, i) => {
       return <li key={i} onClick={this.joinRoom}>{room.room}</li>
     })
 
