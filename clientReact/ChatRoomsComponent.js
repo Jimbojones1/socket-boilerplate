@@ -6,7 +6,8 @@ export class ChatRooms extends React.Component {
   constructor(props) {
     super(props);
   }
-  joinRoom(){
+  joinRoom(e){
+    console.log(e.target.innerText)
     socket.emit('join room', e.target.innerText)
   }
   render() {

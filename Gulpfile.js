@@ -29,19 +29,19 @@ gulp.task('react', function(){
 })
 
 
-gulp.task('createComponent', function(){
+gulp.task('comp', () => {
     // Get the name of the file
-    // ex. gulp createComponent --varName '123'
+    // ex. gulp comp --varName '123'
     var fileName = util.env.varName.toString()
-
-
     // Write the file then ship it off
-
       str(CreateReactClass(fileName))
       .pipe(source(fileName + "Component.js"))
       .pipe(gulp.dest('./clientReact'))
 
 })
+
+
+
 
 function CreateReactClass(className){
   var Component = `const React = require("react")

@@ -20,7 +20,7 @@ export class ChatRoom extends React.Component {
     const state = this.state;
 
     socket.on('users', (usernames, roomName) =>{
-
+      console.log(usernames, roomName)
       state.roomName = roomName || "MainRoom"
       // wrote all this code expecting an array of usernames
       state.usernames = usernames;

@@ -26,6 +26,10 @@ var io        = require('socket.io').listen(server)
 var usernames = {}
 var messages  = []
 var rooms     =[{
+                room: 'mainroom',
+                users: []
+                },
+                {
                 room: 'podcasts',
                 users: []
                 }]
@@ -51,7 +55,8 @@ io.sockets.on('connect', function(socket){
     usernames[username] = socket.id;
     socket.username = username;
     // were going to send to every socket connection the users array
-    io.sockets.emit('users', Object.keys(usernames))
+    rooms[0].users.push(socket.username);
+    io.sockets.emit('users', rooms[0].users, rooms[0].room)
     io.sockets.emit('all messages', messages)
     io.sockets.emit('rooms', rooms)
   })
@@ -69,10 +74,26 @@ io.sockets.on('connect', function(socket){
   })
 
   socket.on('join room', function(roomName){
-
+    console.log(roomName, ' this is roomName')
+    console.log(socket.rooms, 'socketsssss')
     socket.join(roomName)
-    rooms[0].users.push(socket.username)
-    io.sockets.to(roomName).emit('users', rooms[0].users, roomName)
+    for (var i=0; i < rooms.length; i++){
+      if(roomName === rooms[i].room){
+
+        if(rooms[i].room.indexOf(socket.username) != -1){
+            rooms[i].users.push(socket.username)
+
+
+
+            io.sockets.to(roomName).emit('users', rooms[i].users, roomName)
+        }
+        console.log('if is happening', roomName, rooms[i].room)
+
+        return
+      }
+    }
+
+
 
 
   })
