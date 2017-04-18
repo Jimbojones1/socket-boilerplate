@@ -42,7 +42,7 @@ export class ChatRoom extends React.Component {
       <div className="row">
         <Users usernames={this.state.usernames}/>
         <ChatBoard messages={this.state.messages} roomName={this.state.roomName}/>
-        <ChatRooms rooms={this.state.rooms}/>
+        <ChatRooms rooms={this.state.rooms} roomName={this.state.roomName}/>
       </div>
       )
   }

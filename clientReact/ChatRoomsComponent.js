@@ -5,10 +5,13 @@ import {socket} from './main.js'
 export class ChatRooms extends React.Component {
   constructor(props) {
     super(props);
+
+    this.joinRoom = this.joinRoom.bind(this)
   }
   joinRoom(e){
     console.log(e.target.innerText)
-    socket.emit('join room', e.target.innerText)
+    console.log(this.props, ' this.props')
+    socket.emit('join room', e.target.innerText, this.props.roomName)
   }
   render() {
 
