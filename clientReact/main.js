@@ -3,7 +3,7 @@ const ReactDOM = require('react-dom');
 const   io       = require('socket.io-client');
 export const socket   = io.connect();
 
-import {ChatRoom} from './Chatroom.js'
+import {ChatRoom} from './ChatroomContainerComponent.js'
 import {Username} from './UserLoginComponent.js'
 // console.log(ChatRoom)
 class Container extends React.Component {

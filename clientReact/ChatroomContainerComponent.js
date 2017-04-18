@@ -2,7 +2,7 @@ const React    = require('react')
 const io       = require('socket.io-client');
 import {socket} from './main.js'
 import {ChatBoard} from './ChatBoardComponent'
-import {ChatRooms} from './ChatRoomComponent'
+import {ChatRooms} from './ChatRoomsComponent'
 import {Users} from './UserComponent'
 
 export class ChatRoom extends React.Component {
