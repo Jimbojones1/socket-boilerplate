@@ -1,4 +1,4 @@
-var React    = require('react')
+const React    = require('react')
 
 export function Users(props){
     var users = props.usernames.map((user, i) => {

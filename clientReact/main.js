@@ -1,10 +1,10 @@
-var React    = require('react')
-var ReactDOM = require('react-dom');
-var io       = require('socket.io-client');
-export var socket   = io.connect();
+const React    = require('react')
+const ReactDOM = require('react-dom');
+const   io       = require('socket.io-client');
+export const socket   = io.connect();
 
 import {ChatRoom} from './Chatroom.js'
-
+import {Username} from './UserLoginComponent.js'
 // console.log(ChatRoom)
 class Container extends React.Component {
   constructor(props) {
@@ -32,34 +32,8 @@ class Container extends React.Component {
 
 
 
-var Username = React.createClass({
-  getInitialState: function(){
-    return {username: ''}
-  },
-  handleSubmit: function(e){
-    e.preventDefault();
 
-    socket.emit('addUser', this.state.username)
 
-    this.props.logged(true)
-  },
-  handleNameChange: function(event){
-    const state = this.state;
-    state.username = event.target.value;
-    this.setState(state)
-  },
-  render: function(){
-    return (
-      <div className="row">
-        <div className="twelve columns">
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="username" onChange={this.handleNameChange} value={this.state.username}/>
-          </form>
-        </div>
-      </div>
-      )
-  }
-})
 
 
 ReactDOM.render(<Container />, document.getElementById('app'))

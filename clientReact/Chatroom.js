@@ -1,5 +1,5 @@
-var React    = require('react')
-var io       = require('socket.io-client');
+const React    = require('react')
+const io       = require('socket.io-client');
 import {socket} from './main.js'
 import {ChatBoard} from './ChatBoardComponent'
 import {ChatRooms} from './ChatRoomComponent'
