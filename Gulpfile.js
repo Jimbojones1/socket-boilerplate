@@ -12,7 +12,7 @@ var str         = require('string-to-stream');
 //  first arguement is the files I want to watch, the second is the task to run
 gulp.task('watch', function(){
   gulp.watch(['./clientReact/*.js'], ['react'])
-  // gulp.watch(['./server/public/styles/*.less'], ['compile-less'])
+  gulp.watch(['./public/stylesheets/*.less'], ['less'])
   // gulp.watch("./server/views/*.html").on('change', browserSync.reload);
 })
 
@@ -41,6 +41,19 @@ gulp.task('comp', () => {
 })
 
 
+gulp.task('less', function(){
+  gulp.src('./public/stylesheets/main.less')
+  .pipe(less())
+  .pipe(gulp.dest('./public/stylesheets/'));
+})
+
+
+gulp.task('default', ['react', 'watch', 'less'])
+
+
+
+
+
 
 
 function CreateReactClass(className){
@@ -64,11 +77,3 @@ class ${className} extends React.Component {
 
   return Component
 }
-// gulp.task('compile-less', function(){
-//   gulp.src('./server/public/styles/main.less')
-//   .pipe(less())
-//   .pipe(gulp.dest('./server/public/styles'));
-// })
-
-
-gulp.task('default', ['react', 'watch'])

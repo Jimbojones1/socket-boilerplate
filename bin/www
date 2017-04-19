@@ -60,7 +60,8 @@ io.sockets.on('connect', function(socket){
     socket.currentRoom = rooms[0].room
     rooms[0].users.push(socket.username);
     io.sockets.emit('users', rooms[0].users, rooms[0].room)
-    io.sockets.emit('all messages', messages)
+    socket.broadcast.emit('all messages', messages)
+    socket.emit('all messages', messages, socket.username)
     io.sockets.emit('rooms', rooms)
   })
 

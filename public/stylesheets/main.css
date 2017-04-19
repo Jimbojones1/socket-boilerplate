@@ -1,0 +1,12 @@
+body {
+  font-family: 'Crimson Text', serif;
+  background-color: #373c46;
+  color: #60bbff;
+}
+form input {
+  width: 75%;
+}
+.currentUser {
+  color: #ff6f43;
+  font-weight: 900;
+}

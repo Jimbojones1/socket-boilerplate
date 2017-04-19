@@ -26,8 +26,17 @@ export class ChatBoard extends React.Component {
     this.setState(state)
   }
   render(){
+
      var messages = this.props.messages.map( (message, i) => {
-      return <li key={i}>{message.username}: {message.message}</li>
+      console.log('something', message.username, this.props)
+      if(message.username  === this.props.currentUser){
+        console.log('if is hitting')
+        return <li key={i}><span className="currentUser">{message.username}</span>: {message.message}</li>
+      }
+      else {
+         return <li key={i}>{message.username}: {message.message}</li>
+      }
+
     })
 
 
