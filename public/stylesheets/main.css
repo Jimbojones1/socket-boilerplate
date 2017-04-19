@@ -3,10 +3,32 @@ body {
   background-color: #373c46;
   color: #60bbff;
 }
+input[type="text"] {
+  border: 1px solid #35C2EF;
+}
+input[type="text"]:focus {
+  border: 1px solid #00FF68;
+}
+li {
+  list-style: none;
+}
 form input {
   width: 75%;
 }
 .currentUser {
-  color: #ff6f43;
+  color: #ff4694;
   font-weight: 900;
+}
+.room-list-users li {
+  background-color: #2c3038;
+  padding-left: 33%;
+  width: 65%;
+  padding-left: 23%;
+  padding-top: 1%;
+  padding-bottom: 4%;
+}
+.room-list-users li:hover {
+  border: 3px solid #60bbff;
+  background-color: #24deae;
+  color: #322a4e;
 }

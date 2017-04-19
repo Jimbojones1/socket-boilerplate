@@ -8,20 +8,52 @@
 @pink:rgb(255,70,148);
 
 
+@active-input-color: #00FF68;
+@neutral-input-color: #35C2EF;
+
 body {
   font-family: 'Crimson Text', serif;
   background-color: @softgrey;
   color: @blue;
 }
 
+input[type="text"] {
+  border: 1px solid @neutral-input-color;
+
+    &:focus {
+      border: 1px solid @active-input-color;
+    }
+
+}
+
+li {
+  list-style: none;
+
+}
 
 form {
   input {
     width: 75%;
-  }
+
+   }
 }
 
 .currentUser {
-  color: @orange;
+  color: @pink;
   font-weight: 900;
+}
+
+.room-list-users li{
+  background-color: @darkgrey;
+  padding-left: 33%;
+  width: 65%;
+  padding-left: 23%;
+  padding-top: 1%;
+  padding-bottom: 4%;
+
+  &:hover {
+    border: 3px solid @blue;
+    background-color: @green;
+    color: @purple;
+  }
 }

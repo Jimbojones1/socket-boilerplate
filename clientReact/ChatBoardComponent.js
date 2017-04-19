@@ -31,7 +31,7 @@ export class ChatBoard extends React.Component {
       console.log('something', message.username, this.props)
       if(message.username  === this.props.currentUser){
         console.log('if is hitting')
-        return <li key={i}><span className="currentUser">{message.username}</span>: {message.message}</li>
+        return <li key={i}><span className="currentUser">{message.username}:</span> {message.message}</li>
       }
       else {
          return <li key={i}>{message.username}: {message.message}</li>

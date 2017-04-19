@@ -8,7 +8,7 @@ export function Users(props){
     return (
       <div className="three columns">
         <h3>Users</h3>
-        <ul>
+        <ul className="room-list-users">
           {users}
         </ul>
       </div>

@@ -21,15 +21,16 @@ export class ChatRoom extends React.Component {
     const state = this.state;
 
     socket.on('users', (usernames, roomName) =>{
-      console.log(usernames, roomName)
-      console.log(socket.username, 'socket username')
-      state.roomName = roomName || "MainRoom"
+
+      state.roomName = roomName || this.state.roomName;
       // wrote all this code expecting an array of usernames
+
       state.usernames = usernames;
       this.setState(state)
     })
 
     socket.on('all messages', (messages, username) =>{
+      console.log('all messages', messages)
       state.messages = messages;
       state.currentUser = username || this.state.currentUser;
       this.setState(state)
@@ -41,7 +42,7 @@ export class ChatRoom extends React.Component {
     })
   }
   render() {
-    console.log(this.state, ' this.state. looking current user')
+
     return (
       <div className="row">
         <Users usernames={this.state.usernames}/>

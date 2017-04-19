@@ -27,15 +27,29 @@ var usernames = {}
 var messages  = []
 var rooms     =[{
                 room: 'mainroom',
-                users: []
+                users: [],
+                messages: []
                 },
                 {
                 room: 'podcasts',
-                users: []
+                users: [],
+                messages: []
                 }]
 // socket Code will be written here
 io.sockets.on('connect', function(socket){
   console.log('connected')
+
+
+    function findIndexOfCurrentRoom(){
+        for(var i=0; i <rooms.length; i++){
+          var indexOfRoom;
+              if(rooms[i].room.indexOf(socket.currentRoom) != -1){
+              indexOfRoom = i
+               console.log(i, ' this is hitting -1', socket.currentRoom)
+               return indexOfRoom
+              }
+          }
+      }
 
   // emit all messages as soon as user connects
 
@@ -68,45 +82,56 @@ io.sockets.on('connect', function(socket){
   // listening for messages
   socket.on('message', function(message){
     console.log(message)
+
+    var indexOfRoom = findIndexOfCurrentRoom();
+
+
+    console.log(indexOfRoom)
     var obj = {};
     obj.username = socket.username
     obj.message  = message;
-    messages.push(obj)
-
-    io.sockets.emit('all messages', messages)
+    rooms[indexOfRoom].messages.push(obj)
+    console.log(rooms[indexOfRoom].messages, ' this is messages')
+    io.sockets.to(rooms[indexOfRoom].room).emit('all messages', rooms[indexOfRoom].messages)
 
   })
 
   socket.on('join room', function(roomName){
     console.log(roomName, ' this is roomName')
     console.log(socket.rooms, 'socketsssss')
-    socket.leave(socket.currentRoom)
-
 
 
 
     for (var i=0; i < rooms.length; i++){
+
+
+
       if(roomName === rooms[i].room){
 
+        var indexOfPrevious = findIndexOfCurrentRoom();
+        socket.leave(socket.currentRoom)
+        // console.log(indexOfRoom, ' indexofRoom')
+        var indexOfUser = rooms[indexOfPrevious].users.indexOf(socket.username);
+        rooms[indexOfPrevious].users.splice(indexOfUser, 1)
+        io.sockets.to(socket.currentRoom).emit('users', rooms[indexOfPrevious].users, socket.currentRoom)
+
         if(rooms[i].room.indexOf(socket.username) === -1){
-          socket.join(roomName)
-          socket.currentRoom = roomName;
+            socket.join(roomName)
 
-          console.log(io.nsps['/'].adapter.rooms, ' this is rooms')
-            console.log('if is happening', rooms[i].room.indexOf(socket.username))
+
+            // var indexOfUser = rooms[i].users.indexOf(socket.username);
+            // rooms[i].users.splice(indexOfUser, 1)
+            socket.currentRoom = roomName;
+
+            console.log(socket.currentRoom, 'scoket current room')
             rooms[i].users.push(socket.username)
-            io.sockets.to(roomName).emit('users', rooms[i].users, roomName)
-        }
-        console.log('if is happening', roomName, rooms[i].room)
-      }
-      else if(rooms[i].room === socket.currentRoom){
-        var indexOfUser = rooms[i].users.indexOf(socket.username);
-        rooms[i].users.splice(indexOfUser, 1)
-        io.sockets.to(socket.currentRoom).emit('users', rooms[i].users, roomName)
-        console.log(indexOfUser)
+            console.log('if is happening', rooms[i].users, roomName)
+            io.sockets.to(roomName).emit('all messages', rooms[i].messages)
+            io.sockets.to(roomName).emit('users', rooms[i].users, socket.currentRoom)
 
+        }
       }
-    }
+    }// end of loop
 
 
 

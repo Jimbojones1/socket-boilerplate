@@ -22,7 +22,7 @@ export class ChatRooms extends React.Component {
     return (
       <div className="three columns">
         <h3>Rooms</h3>
-        <ul>
+        <ul className="room-list-users">
           {rooms}
         </ul>
       </div>
